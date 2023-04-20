@@ -1,0 +1,80 @@
+{
+  "total": 0,
+  "lastPage": 0,
+  "currPage": 0,
+  "rows": [
+    {
+      "_id": "string",
+      "serial_type": true,
+      "option_type": true,
+      "private_price": true,
+      "cost_price": 0,
+      "delivery": true,
+      "stock_infinite": true,
+      "show_front": true,
+      "popular_product": true,
+      "type_code": "string",
+      "name": "string",
+      "unit": "string",
+      "product_type": {
+        "_id": "string",
+        "name": "string",
+        "description": "string",
+        "image": "string",
+        "createdAt": "string",
+        "updatedAt": "string",
+        "__v": 0,
+        "show_front": true
+      },
+      "price": 0,
+      "minimum_inventory_size": 0,
+      "weight": 0,
+      "inventory": 0,
+      "detail": "string",
+      "images": [
+        {
+          "_id": "string",
+          "url": "string",
+          "createdAt": "string",
+          "updatedAt": "string",
+          "__v": 0
+        }
+      ],
+      "options": [
+        {
+          "name": "string",
+          "price": 0,
+          "weight": 0,
+          "pack_size": "string",
+          "inventory": "string"
+        }
+      ],
+      "createdAt": "string",
+      "updatedAt": "string",
+      "__v": 0,
+      "total_price": 0,
+      "comments": [
+        {}
+      ],
+      "options_inventory": 0,
+      "total_cost_price": 0,
+      "total_ratings": 0,
+      "avg_ratings": 0,
+      "onlineorders": [
+        {
+          "_id": "string",
+          "product": "string",
+          "quantity": 0,
+          "price": 0,
+          "detailMore": "string"
+        }
+      ],
+      "number_of_sales_online": 0,
+      "number_of_sales_offline_out": 0,
+      "total_price_offline_out": 0,
+      "number_of_sales_offline_in": 0,
+      "total_price_offline_in": 0,
+      "id": "string"
+    }
+  ]
+}
