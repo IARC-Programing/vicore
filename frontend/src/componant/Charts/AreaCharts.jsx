@@ -2,20 +2,18 @@ import React from "react";
 import Chart from "react-apexcharts";
 import { ChartData } from "../../Data";
 
-
-const BarChart = ({chartType}) => {
-  console.log(ChartData);
+const AreaCharts = ({ chartType }) => {
   const data = {
     series: [
       {
         name: "sales",
-        data: ChartData.map((data)=> data.ProductAmount)
+        data: ChartData.map((data) => data.ProductAmount)
       }
     ],
     options: {
       chart: {
         height: 350,
-        type: {chartType},
+        type: { chartType },
         zoom: {
           enabled: false
         }
@@ -45,4 +43,4 @@ const BarChart = ({chartType}) => {
   );
 };
 
-export default BarChart;
+export default AreaCharts;

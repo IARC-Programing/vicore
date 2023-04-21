@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BarCharts from "../../componant/Charts/BarCharts";
 import LineCharts from "../../componant/Charts/LineCharts";
+import AreaCharts from "../../componant/Charts/AreaCharts";
 import PieChart from "../../componant/Charts/PieCharts";
 import MiniCalendar from "../../componant/MiniCalender/MiniCalender";
 
@@ -18,23 +19,27 @@ const Maindash = () => {
           onChange={(e) => setSelectType(e?.target?.value)}
           defaultValue={selectType}
         >
-          <option value="bar">bar</option>
-          <option value="line">line</option>
+          <option value="bar">Bar</option>
+          <option value="line">Line</option>
+          <option value="area">Area</option>
         </select>
 
         <div className="w-full h-full overflow-hidden">
           {selectType === "bar" ? (
             <BarCharts chartType="bar" />
-          ) : (
+          ) : selectType === "line" ? (
             <LineCharts chartType="line" />
-          )}
+          ) : <AreaCharts chartType="area"/>
+
+          }
         </div>
 
         
       </div>
       <div className="w-2/10 my-auto mx-auto">
         <PieChart />
-        {/* <MiniCalendar /> */}
+        
+        <MiniCalendar />
       </div>
     </div>
   );

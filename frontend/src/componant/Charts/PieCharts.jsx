@@ -1,15 +1,17 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import { ChartData } from "../../Data";
 
 const PieCharts = () => {
   const chartOptionsPie = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+    labels: ChartData.map((data)=>data.ProductName)
   };
   return (
-    <div>
+    
+       <div style={{width: "175%"}}>
       <Chart
         options={chartOptionsPie}
-        series={[30, 40, 35, 50, 49, 60, 70, 91, 125]}
+        series={ChartData.map((data)=>data.ProductAmount)}
         type="pie"
       />
     </div>

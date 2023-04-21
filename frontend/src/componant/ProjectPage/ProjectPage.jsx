@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Data } from "../../Data";
 import SweetAlert from "sweetalert-react";
 
 const ProjectPage = () => {
@@ -9,8 +8,9 @@ const ProjectPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://172.30.89.60:5000/api/projects")
+      .get("http://127.0.0.1:8000/api/projects")
       .then((response) => {
+        console.log("response",response)
         setProjects(response.data);
       })
       .catch((error) => {
@@ -31,12 +31,12 @@ const ProjectPage = () => {
           </tr>
         </thead>
         <tbody>
-          {Data?.map((projects, index) => (
+          {projects?.map((projects, index) => (
             <tr key={index}>
-              <td className="border border-gray-500 p-2">{projects.ID}</td>
-              <td className="border border-gray-500 p-2">{projects.Name}</td>
-              <td className="border border-gray-500 p-2">{projects.Section}</td>
-              <td className="border border-gray-500 p-2">{projects.API}</td>
+              <td className="border border-gray-500 p-2">{projects.project_id}</td>
+              <td className="border border-gray-500 p-2">{projects.project_name}</td>
+              <td className="border border-gray-500 p-2">{projects.project_section}</td>
+              <td className="border border-gray-500 p-2">{projects.project_url}</td>
               <td className="border border-gray-500 p-2">
                 <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-md text-sm px-3 py-1.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   Details

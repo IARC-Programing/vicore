@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { formdropdown } from "../../Data";
 import axios from "axios";
 
@@ -8,8 +7,9 @@ function Forms() {
     PROJECT_NAME: "",
     API_URL: "",
     API_KEY: "",
+    
   });
-  console.log(inputForms);
+
   const handleChange = (e) => {
     const { target } = e;
     const { name, value } = target;
@@ -28,11 +28,11 @@ function Forms() {
     e.preventDefault();
     console.log("submit payload", inputForms, selectedValue);
     axios
-      .post("http://172.30.88.85:5000/api/projects", {
-        PROJECT_NAME: inputForms.PROJECT_NAME,
-        API_URL: inputForms.API_URL,
-        API_KEY: inputForms.API_KEY,
-        PROJECT_SECTION: selectedValue,
+      .post("http://127.0.0.1:8000/api/projects/post", {
+        project_name: inputForms.PROJECT_NAME,
+        project_url: inputForms.API_URL,
+        project_key: inputForms.API_KEY,
+        project_section: selectedValue,
       })
       .then(function (response) {
         console.log(response);
@@ -104,7 +104,7 @@ function Forms() {
                 Frame
               </label>
               <select
-                name="FRAME"
+                name="Frame"
                 id="frameDropdown"
                 onChange={handleDropdownChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -119,6 +119,7 @@ function Forms() {
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => window.location.reload(false)}
             >
               Submit
             </button>

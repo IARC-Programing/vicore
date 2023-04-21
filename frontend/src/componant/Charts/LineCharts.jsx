@@ -1,12 +1,13 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import { ChartData } from "../../Data";
 
 const LineChart = ({ chartType }) => {
   const data = {
     series: [
       {
         name: "sales",
-        data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+        data: ChartData.map((data) => data.ProductAmount)
       }
     ],
     options: {
@@ -24,17 +25,7 @@ const LineChart = ({ chartType }) => {
         curve: "smooth"
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep"
-        ]
+        categories: ChartData.map((data) => data.ProductName)
       }
     }
   };

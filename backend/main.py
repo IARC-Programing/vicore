@@ -1,17 +1,22 @@
-from typing import Optional
-from fastapi import FastAPI, HTTPException, Depends, Request,status
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel
-from jwttoken import create_access_token
-from oauth import get_current_user
-from fastapi.security import OAuth2PasswordRequestForm
+
+from fastapi import FastAPI, Response, status, HTTPException
+
+import requests
+
 from fastapi.middleware.cors import CORSMiddleware
 
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
+
+import mysql.connector
+
+from projects import get_projects, mySQL_Connection
+from projectid import get_projectid
+
+from eaccoms import get_eaccoms
+
 app = FastAPI()
-origins = [
-    "http://localhost:3000",
-    "http://localhost:8080",
-]
+origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -20,45 +25,45 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from pymongo import MongoClient
-mongodb_uri = 'mongodb+srv://manjeet:test1234@cluster0.nbszr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-port = 8000
-client = MongoClient(mongodb_uri, port)
-db = client["User"]
+
+@app.post("/api/projects/post")
+async def insert_user(data: dict):
+    Project_name = data.get("PROJECT_NAME")
+    Project_api = data.get("API_URL")
+    Project_key = data.get("API_KEY")
+    Project_section = data.get("PROJECT_SECTION")
+
+    if not all([Project_name, Project_api, Project_key, Project_section]):
+        raise HTTPException(
+            status_code=400, detail="กรุณากรอกข้อมูลให้ครบถ้วนก่อนที่จะบันทึกลงฐานข้อมูล")
+    try:
+        mySQL, myCursor = mySQL_Connection()
+
+        Database = "INSERT INTO `projects` (`project_name`, `project_url`, `project_key`, `project_section`) VALUES (%s, %s, %s, %s)"
+        Variable = (Project_name, Project_api, Project_key, Project_section)
+        myCursor.execute(Database, Variable)
+
+        mySQL.commit()
+        mySQL.close()
+        myCursor.close()
+        return JSONResponse(content=jsonable_encoder({"message": "คุณได้บันทึกลงฐานข้อมูลเรียบร้อยแล้ว"}))
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=500, detail=str(err))
 
 
-class User(BaseModel):
-    username: str
-    company: str
-    password: str
-class Login(BaseModel):
-	username: str
-	password: str
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-class TokenData(BaseModel):
-    username: Optional[str] = None
+@app.get("/api/projects")
+def read_products():
+    products = get_projects()
+    return JSONResponse(content=jsonable_encoder(products))
 
-@app.get("/")
-def read_root(current_user:User = Depends(get_current_user)):
-	return {"data":"Hello OWrld"}
 
-@app.post('/register')
-def create_user(request:User):
-	hashed_pass = Hash.bcrypt(request.password)
-	user_object = dict(request)
-	user_object["password"] = hashed_pass
-	user_id = db["users"].insert(user_object)
-	# print(user)
-	return {"res":"created"}
+@app.get("/api/projects/{id}")
+def read_product(id: int, response: Response):
+    return get_projectid(id, response)
 
-@app.post('/login')
-def login(request:OAuth2PasswordRequestForm = Depends()):
-	user = db["users"].find_one({"username":request.username})
-	if not user:
-		raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail = f'No user found with this {request.username} username')
-	if not Hash.verify(user["password"],request.password):
-		raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail = f'Wrong Username or password')
-	access_token = create_access_token(data={"sub": user["username"] })
-	return {"access_token": access_token, "token_type": "bearer"}
+@app.get("/api/accoms/rooms")
+async def get_rooms():
+    url = "https://demo.eaccom.net/api/v1/room/"
+    response = requests.get(url)
+    data = response.json()
+    return data

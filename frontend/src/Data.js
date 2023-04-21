@@ -42,7 +42,7 @@ export const NavbarData = [
   }
 ];
 
-export const ChartType = ["LineCharts", "BarCharts"];
+export const ChartType = ["LineCharts", "BarCharts","AreaCharts"];
 
 export const Data = [
   {
@@ -106,72 +106,72 @@ export const Data = [
 export const ChartData = [
   {
     ProductID: "01",
-    ProductName: "",
-    ProductAmount: "100"
+    ProductName: "หูฟังไร้สาย AirPods Pro จาก Apple",
+    ProductAmount: 100
   },
   {
     ProductID: "02",
-    ProductName: "",
-    ProductAmount: "150"
+    ProductName: "รองเท้าวิ่ง ASICS Gel-Kayano 28",
+    ProductAmount: 150
   },
   {
     ProductID: "03",
-    ProductName: "",
-    ProductAmount: "156"
+    ProductName: "แท็บเล็ต iPad Pro 12.9 นิ้วจาก Apple",
+    ProductAmount: 156
   },
   {
     ProductID: "04",
-    ProductName: "",
-    ProductAmount: "123"
+    ProductName: "กล้องดิจิตอล Sony Alpha A7 III",
+    ProductAmount: 123
   },
   {
     ProductID: "05",
-    ProductName: "",
-    ProductAmount: "9999"
+    ProductName: "มือถือ iPhone 13 Pro Max จาก Apple",
+    ProductAmount: 99
   },
   {
     ProductID: "06",
-    ProductName: "",
-    ProductAmount: "456"
+    ProductName: "กางเกงยีนส์ Levi's 511 Slim Fit",
+    ProductAmount: 456
   },
   {
     ProductID: "07",
-    ProductName: "",
-    ProductAmount: "216"
+    ProductName: "ตู้เย็บผ้าอิเล็กทรอนิกส์ Brother CS6000i",
+    ProductAmount: 216
   },
   {
     ProductID : "08",
-    ProductName : "",
-    ProductAmount : "165",
+    ProductName : "โต๊ะทำงานรูปพิ้นตู้ Tvilum Walker",
+    ProductAmount : 165
   },
   {
     ProductID : "09",
-    ProductName : "",
-    ProductAmount : "21",
+    ProductName : "โรตีเกาหลีแบบชิ้นเนื้อ (Bulgogi) จากร้าน K-Pocha",
+    ProductAmount : 21
   },
   {
     ProductID : "10",
-    ProductName : "",
-    ProductAmount : "213",
+    ProductName : "กล้องติดรถยนต์ Dash Cam ของ Nextbase",
+    ProductAmount : 213
   },
   {
     ProductID : "11",
-    ProductName : "",
-    ProductAmount : "123",
+    ProductName : "โทรทัศน์ OLED LG C1 55 นิ้ว",
+    ProductAmount : 123
   },
   {
     ProductID : "12",
-    ProductName : "",
-    ProductAmount : "213",
+    ProductName : "เครื่องทำกาแฟแบบอัตโนมัติ Jura S8",
+    ProductAmount : 213
   },
   {
     ProductID : "13",
-    ProductName : "",
-    ProductAmount : "547",
+    ProductName : "โคมไฟโต๊ะ Flos Kelvin LED Green Mode",
+    ProductAmount : 547
   },
   {
     ProductID : "14",
-    ProductName : "",
-    ProductAmount : "218",
+    ProductName : "กระเป๋าสะพายข้าง Prada Sidonie Mini Leather Shoulder Bag",
+    ProductAmount : 218
   },
 ];

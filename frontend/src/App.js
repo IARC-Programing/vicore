@@ -19,9 +19,9 @@ function App() {
             <Route
               path="/"
               element={
-                <div className="flex flex-row h-screen">
+                // <div className="flex flex-row h-screen">
                   <Login />
-                </div>
+                // </div>
               }
             ></Route>
             <Route

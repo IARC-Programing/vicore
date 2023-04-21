@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fullcalendar/core": "^6.1.5",
+    "@fullcalendar/react": "^6.1.5",
+    "@fullcalendar/resource": "^6.1.5",
+    "@fullcalendar/resource-timeline": "^6.1.5",
     "@heroicons/react": "^2.0.17",
     "@material-tailwind/react": "^1.4.2",
+    "@syncfusion/ej2-react-calendars": "^21.1.41",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
