@@ -8,6 +8,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import RadarCharts from "../../componant/Charts/RadarCharts";
 
+
 const ShowData = () => {
   const params = useParams([]);
   const [selectType, setSelectType] = useState("bar");
@@ -70,7 +71,7 @@ const ShowData = () => {
   return (
     <div className="flex mx-auto">
       <div className="container mt-12 bg-slate-100 rounded w-full">
-        <h1 className="font-bold text-lg font-mono">room eaccoms</h1>
+        <h1 className="font-bold text-lg font-mono">{Data.project_name}</h1>
         <div className="w-8/10">
           <select
             className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600 "
@@ -81,8 +82,8 @@ const ShowData = () => {
             <option value="line">Line</option>
             <option value="area">Area</option>
           </select>
-
-          <div className="container w-4/6 mt-12 ">
+          
+          <div className="container w-4/6 mt-12">
             {selectType === "bar" ? (
               <BarCharts chartType="bar" data={Project} />
             ) : selectType === "line" ? (
@@ -90,17 +91,18 @@ const ShowData = () => {
             ) : (
               <AreaCharts chartType="area" data={Project} />
             )}
-            <div className="w-12/24 mx-auto flex">
+            
+            <div className="w-12/24 mx-auto flex justify-center">
               <PieChart1 data={Project1} />
 
               <PieChart2 data={Project2} />
 
               {/*<BarChart2 data={Project} chartType="bar" /> */}
-            </div>
+            </div></div>
           </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 

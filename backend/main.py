@@ -66,19 +66,19 @@ def delete_project(id: int, respone: Response):
 # การเพิ่มฐานข้อมูลเกี่ยวกับโปรเจ็ค
 @app.post("/projects/post")
 async def insert_user(data: dict):
-    Project_name = data.get("project_name")
+    Project_description = data.get("project_name")
     Project_api = data.get("project_url")
     Project_key = data.get("project_key")
     Project_section = data.get("project_section")
 
-    if not all([Project_name, Project_api, Project_key, Project_section]):
+    if not all([Project_description, Project_api, Project_key, Project_section]):
         raise HTTPException(
             status_code=400, detail="กรุณากรอกข้อมูลให้ครบถ้วนก่อนที่จะบันทึกลงฐานข้อมูล")
     try:
         mySQL, myCursor = mySQL_Connection()
 
         Database = "INSERT INTO `projects` (`project_name`, `project_url`, `project_key`, `project_section`) VALUES (%s, %s, %s, %s)"
-        Variable = (Project_name, Project_api, Project_key, Project_section)
+        Variable = (Project_description, Project_api, Project_key, Project_section)
         myCursor.execute(Database, Variable)
 
         mySQL.commit()

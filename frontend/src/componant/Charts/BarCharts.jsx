@@ -1,13 +1,16 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import _ from "lodash"
 
 const BarChart = ({ chartType, data }) => {
   console.log("data", data);
+  const price = _.compact(data?.rows?.map((d) => d?.sub_type?.price || ""));
+  
   const chatsData = {
     series: [
       {
         name: "sales",
-        data: data?.rows?.map((d) => d?.sub_type?.price || "")
+        data: price
       }
     ],
     options: {
