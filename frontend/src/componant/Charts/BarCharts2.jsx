@@ -1,14 +1,13 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-
-const AreaCharts = ({ chartType, data }) => {
-  console.log(data);
-  const chartsData = {
+const BarChart2 = ({ chartType, data }) => {
+  console.log("data", data);
+  const chatsData = {
     series: [
       {
         name: "sales",
-        data: data?.rows?.map((d) => d?.sub_type?.price ||"")
+        data: data?.rows?.map((d) => d?.sub_type?.price || "")
       }
     ],
     options: {
@@ -19,6 +18,12 @@ const AreaCharts = ({ chartType, data }) => {
           enabled: false
         }
       },
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          horizontal: true
+        }
+      },
       dataLabels: {
         enabled: false
       },
@@ -26,8 +31,7 @@ const AreaCharts = ({ chartType, data }) => {
         curve: "smooth"
       },
       xaxis: {
-        type: "category",
-        categories: data?.rows?.map((d) => d?.name || '')
+        categories: data?.rows?.map((d) => d?.name || "")
       }
     }
   };
@@ -35,14 +39,14 @@ const AreaCharts = ({ chartType, data }) => {
   return (
     <div>
       <Chart
-        options={chartsData.options}
-        series={chartsData.series}
+        options={chatsData.options}
+        series={chatsData.series}
         type={chartType}
-        height={500}
-        width={1000}
+        height={250}
+        width={500}
       />
     </div>
   );
 };
 
-export default AreaCharts;
+export default BarChart2;

@@ -7,23 +7,18 @@ import Sidebar from "./componant/Sidebar/Sidebar";
 import Login from "./componant/Login/Login";
 import ProjectPage from "./componant/ProjectPage/ProjectPage";
 import Maindash from "./view/Maindash/Maindash";
+import EditForms from "./view/Form/EditForms";
+import ShowData from "./view/Maindash/ShowData";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="App w-full">
         <Navbars />
         <div className="flex">
           <Sidebar />
           <Routes>
-            <Route
-              path="/"
-              element={
-                // <div className="flex flex-row h-screen">
-                  <Login />
-                // </div>
-              }
-            ></Route>
+            <Route path="/" element={<Login />}></Route>
             <Route
               path="dashboard"
               element={
@@ -32,14 +27,16 @@ function App() {
                 </div>
               }
             ></Route>
-             <Route path="Login" element={<Login />}></Route>
+            <Route path="signup" element={<Login />}></Route>
             <Route path="form" element={<Forms />}></Route>
             <Route path="Project" element={<ProjectPage />}></Route>
+            <Route path="EditForms/:id" element={<EditForms />}></Route>
+            <Route path="ShowData/:id" element={<ShowData />}></Route>
           </Routes>
         </div>
       </div>
     </BrowserRouter>
   );
-}
+} 
 
 export default App;

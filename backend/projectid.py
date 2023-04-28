@@ -12,25 +12,26 @@ def mySQL_Connection():
 def get_projectid(id: int, response: Response):
     mySQL, myCursor = mySQL_Connection()
 
-    # myproducts = 'SELECT * FROM `products` WHERE `product_id` = %s'
-    # val = (id, )
-    # myCursor.execute(myproducts, val)
-    # mystringproducts = myCursor.fetchone()
+    myproducts = 'SELECT * FROM `projects` WHERE `project_id` = %s'
+    val = (id, )
+    myCursor.execute(myproducts, val)
+    mystringprojects = myCursor.fetchone()
 
-    # mycomponents = 'SELECT * FROM `products_component` WHERE `component_id` = %s'
-    # val = (id, )
-    # myCursor.execute(mycomponents, val)
-    # mystringcomponents = myCursor.fetchall()
-
-    # if mystringproducts is None:
-    #     response.status_code = status.HTTP_404_NOT_FOUND
-    #     return {"message": "ไม่มีสินค้าชิ้นนี้ในฐานข้อมูล"}
-    # else:
-    #     result = {}
-    #     result['product_id'] = mystringproducts['product_id']
-    #     result['product_name'] = mystringproducts['product_name']
-    #     result['product_price'] = mystringproducts['product_price']
-    #     result['product_total'] = mystringproducts['product_total']
+    if mystringprojects is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "ไม่มีสินค้าชิ้นนี้ในฐานข้อมูล"}
+    else:
+        result = {}
+        result['project_id'] = mystringprojects['project_id']
+        result['project_name'] = mystringprojects['project_name']
+        result['project_url'] = mystringprojects['project_url']
+        result['project_key'] = mystringprojects['project_key']
+        result['project_section'] = mystringprojects['project_section']
+        
+        mySQL.close()
+        myCursor.close()
+        response.status_code = status.HTTP_200_OK
+        return result
 
     #     if mystringcomponents:
     #         component = []

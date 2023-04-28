@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import { formdropdown } from "../../Data";
 import axios from "axios";
-import Swal from "sweetalert2";
+import { useParams } from "react-router";
+import { Button } from "@material-ui/core";
 
-function Forms() {
+function EditForms() {
+  const params = useParams([]);
+  const [project, setProjects] = useState({});
   const [inputForms, setinputForms] = useState({
     PROJECT_NAME: "",
     API_URL: "",
@@ -29,31 +31,38 @@ function Forms() {
     e.preventDefault();
     console.log("submit payload", inputForms, selectedValue);
     axios
-      .post("http://127.0.0.1:5000/projects/post", {
+      .put("http://127.0.0.1:5000/projects", {
         project_name: inputForms.PROJECT_NAME,
         project_url: inputForms.API_URL,
         project_key: inputForms.API_KEY,
-        project_section: selectedValue
+        project_section: selectedValue,
+        project_id: params.id
       })
       .then(function (response) {
-        Swal.fire({
-          title: "Success!",
-          text: "Your project has been added.",
-          icon: "success",
-          confirmButtonText: "OK"
-        }).then(() => {
-          window.location.href = "/Project";
-        });
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
+  console.log(`param`, params);
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:5000/EditForms/${params.id}`)
+      .then((response) => {
+        console.log("response", response);
+        setProjects(response.data);
+        console.log("project", project);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
-    <div className="container mx-auto mt-12">
+    <div className="flex flex-col h-full justify-end w-3/4">
       <div className="flex-1 mt-8 p-6">
-        <div className="bg-slate-50 p-6 rounded-lg shadow-md">
+        <div className="bg-white p-6 rounded-lg shadow-md">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
@@ -67,6 +76,7 @@ function Forms() {
                 id="projectName"
                 type="text"
                 placeholder="Enter Project Name"
+                defaultValue={project.project_name}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
@@ -83,6 +93,7 @@ function Forms() {
                 id="apiUrl"
                 type="url"
                 placeholder="Enter API URL"
+                defaultValue={project.project_url}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
@@ -99,6 +110,7 @@ function Forms() {
                 id="apiKey"
                 type="text"
                 placeholder="Enter API Key"
+                defaultValue={project.project_key}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
@@ -117,8 +129,8 @@ function Forms() {
                 onChange={handleDropdownChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               >
-                <option className="font-mono">
-                  <span className="font-mono">...</span>
+                <option value={project.project_section}>
+                  {project.project_section} (Default)
                 </option>
                 <option value={formdropdown[0]}>{formdropdown[0]}</option>
                 <option value={formdropdown[1]}>{formdropdown[1]}</option>
@@ -129,17 +141,18 @@ function Forms() {
             {/* <button
               type="submit"
               className="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              onClick={() => window.location.reload(false)}
+              onClick={() => (window.location.href = "/project")}
             >
-              ADD
+              Update
             </button> */}
             <Button
               type="submit"
               variant="contained"
               color="primary"
+              onClick={() => (window.location.href = "/project")}
               disableElevation
             >
-              <span className="font-bold">add</span>
+              <span className="font-bold">update</span>
             </Button>
           </form>
         </div>
@@ -148,4 +161,4 @@ function Forms() {
   );
 }
 
-export default Forms;
+export default EditForms;

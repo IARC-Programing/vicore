@@ -1,12 +1,26 @@
-import React from 'react'
-import FullCalendar from '@fullcalendar/react' // must go before plugins
-import resourceTimelinePlugin from '@fullcalendar/resource-timeline' // a plugin!
+import FullCalendar from "@fullcalendar/react";
+import daygridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import { useState } from "react";
 
-const MiniCalender = () => {
+const MyCalendar = () => {
+  const [events, setEvents] = useState([]);
+
   return (
-    <FullCalendar schedulerLicenseKey="XXX" plugins={[ resourceTimelinePlugin ]} />
-  )
-}
+    <div>
+      <FullCalendar
+        editable
+        selectable
+        events={events}
+        headerToolbar={{
+          start: "today prev next",
+          end: "dayGridMonth dayGridWeek dayGridDay",
+        }}
+        plugins={[daygridPlugin, interactionPlugin]}
+        views={["dayGridMonth", "dayGridWeek", "dayGridDay"]}
+      />
+    </div>
+  );
+};
 
-export default MiniCalender
- 
+export default MyCalendar

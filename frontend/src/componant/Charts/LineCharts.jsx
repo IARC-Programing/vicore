@@ -1,13 +1,13 @@
 import React from "react";
 import Chart from "react-apexcharts";
-import { ChartData } from "../../Data";
 
-const LineChart = ({ chartType }) => {
-  const data = {
+
+const LineChart = ({ chartType, data }) => {
+  const chartsData = {
     series: [
       {
         name: "sales",
-        data: ChartData.map((data) => data.ProductAmount)
+        data: data?.rows?.map((d) => d?.sub_type?.price || "")
       }
     ],
     options: {
@@ -25,7 +25,7 @@ const LineChart = ({ chartType }) => {
         curve: "smooth"
       },
       xaxis: {
-        categories: ChartData.map((data) => data.ProductName)
+        categories: data?.rows?.map((d) => d?.name || '')
       }
     }
   };
@@ -33,8 +33,8 @@ const LineChart = ({ chartType }) => {
   return (
     <div>
       <Chart
-        options={data.options}
-        series={data.series}
+        options={chartsData.options}
+        series={chartsData.series}
         type={chartType}
         height={500}
         width={1000}

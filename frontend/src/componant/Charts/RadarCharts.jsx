@@ -1,19 +1,18 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-const BarChart = ({ chartType, data }) => {
-  console.log("data", data);
+const RadarCharts = ({ data }) => {
   const chatsData = {
     series: [
       {
-        name: "sales",
-        data: data?.rows?.map((d) => d?.sub_type?.price || "")
+        name: "Series 1",
+        data: [80, 50, 30, 40, 100, 20]
       }
     ],
     options: {
       chart: {
-        height: 350,
-        type: { chartType },
+        height: 500,
+        type: "radar",
         zoom: {
           enabled: false
         }
@@ -25,22 +24,20 @@ const BarChart = ({ chartType, data }) => {
         curve: "smooth"
       },
       xaxis: {
-        categories: data?.rows?.map((d) => d?.name || "")
+        categories: ["January", "February", "March", "April", "May", "June"]
       }
     }
   };
 
   return (
-    <div>
+    <div style={{width: "100%"}}>
       <Chart
         options={chatsData.options}
         series={chatsData.series}
-        type={chartType}
-        height={500}
-        width={1000}
+        type="radar"
       />
     </div>
   );
 };
 
-export default BarChart;
+export default RadarCharts;
