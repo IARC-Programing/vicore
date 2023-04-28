@@ -97,7 +97,7 @@ const ShowData = () => {
 
               <PieChart2 data={Project2} />
 
-              {/*<BarChart2 data={Project} chartType="bar" /> */}
+              {/*<BarChart2 data={Project} chartType=dd"bar" /> */}
             </div></div>
           </div>
         </div>
